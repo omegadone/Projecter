@@ -87,8 +87,8 @@ main {
   flex-direction: column;
   gap: 1rem;
   box-shadow: 10px 10px 5px rgba(0,0,0,0.05);
-  flex: 1 1 calc(30% - 1rem);
-  max-width: calc(33% - 1rem);
+  flex: 0 0 calc(33.333% - 0.666rem);
+  max-width: calc(33.333% - 0.666rem);
 }
 
 .project-card h2 {
