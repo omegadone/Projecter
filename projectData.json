@@ -1,0 +1,30 @@
+let projectData = {
+  projects: [
+    {
+      id: 1,
+      name: "Website Redesign",
+      description: "Create and launch new company website.",
+      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
+      tasks: [
+        {
+          id: 101,
+          title: "Design homepage layout",
+          status: "in-progress",
+          assignedTo: 1,
+          notes: ["Use company colors", "Check responsive breakpoints"] // new
+        },
+        {
+          id: 102,
+          title: "Build navigation menu",
+          status: "todo",
+          assignedTo: 2,
+          notes: []
+        }
+      ]
+    }
+  ],
+  users: [
+    { id: 1, name: "Sarah Walker" },
+    { id: 2, name: "Daryle Suggs" }
+  ]
+};
