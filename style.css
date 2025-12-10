@@ -11,6 +11,174 @@ body {
   display: flex;
   flex-direction: column;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  color: #292F36;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background-color: #4ECDC4;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Main content */
+main {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Add Section */
+.add-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.add-section input {
+  padding: 0.5rem 1rem;
+  border: 2px solid #4ECDC4;
+  border-radius: 5px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.add-section button {
+  background-color: #4ECDC4;
+  color: #F7FFF7;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-section button:hover {
+  background-color: #38B5AA;
+}
+/*project cards*/
+#projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-card {
+  background-color: #F7FFF7;
+  border: 2px solid #4ECDC4;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 10px 10px 5px rgba(0,0,0,0.05);
+  flex: 1 1 calc(30% - 1rem);
+  max-width: calc(33% - 1rem);
+}
+
+.project-card h2 {
+  color: #292F36;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  color: #292F36;
+}
+
+.project-card .tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-left: 5px solid #4ECDC4;
+  background-color: #F7FFF7;
+  border-radius: 5px;
+}
+
+.task-item.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-item button {
+  background-color: #4ECDC4;
+  border: none;
+  color: #F7FFF7;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.task-item button:hover {
+  background-color: #38B5AA;
+}
+
+.add-task-section {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.add-task-section input {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #4ECDC4;
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .add-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-task-section {
+    flex-direction: column;
+  }
+}
+.project-notes, .task-notes {
+  margin-top: 0.5rem;
+}
+
+.project-notes ul, .task-notes ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.project-notes input, .task-notes input {
+  padding: 0.3rem 0.5rem;
+  margin-right: 0.3rem;
+  border: 1px solid #4ECDC4;
+  border-radius: 5px;
+}
 
 /* Header */
 header {

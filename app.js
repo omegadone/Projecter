@@ -1,115 +1,93 @@
-// Project Management App (Proof of Concept)
-// Uses JSON as live "database"
+// -------------------- app.js --------------------
 
-// Starting JSON "database"
-let projectData = {
-  "projects": [
-    {
-      "id": 1,
-      "name": "Website Redesign",
-      "description": "Create and launch new company website.",
-      "tasks": [
-        {
-          "id": 101,
-          "title": "Design homepage layout",
-          "status": "in-progress",
-          "assignedTo": 1
-        },
-        {
-          "id": 102,
-          "title": "Build navigation menu",
-          "status": "todo",
-          "assignedTo": 2
-        }
-      ]
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "name": "Sarah Walker"
-    },
-    {
-      "id": 2,
-      "name": "Daryle Suggs"
-    }
-  ]
-};
+// Store loaded data
+let projectData = { projects: [], users: [] };
 
-// Utility: generate a unique ID
+// -------------------- Load JSON --------------------
+async function loadProjectData() {
+  try {
+    const response = await fetch("projectData.json");
+    if (!response.ok) throw new Error("Failed to load projectData.json");
+    projectData = await response.json();
+    renderProjects(); // render after loading
+  } catch (err) {
+    console.error("Error loading project data:", err);
+  }
+}
 
+// -------------------- Utilities --------------------
 function generateId() {
   return Math.floor(Math.random() * 100000);
 }
 
-// PROJECT FUNCTIONS
-
+// -------------------- PROJECT FUNCTIONS --------------------
 function createProject(name, description) {
   const newProject = {
     id: generateId(),
     name,
     description,
-    tasks: []
+    tasks: [],
+    notes: []
   };
   projectData.projects.push(newProject);
+  renderProjects();
   return newProject;
 }
 
 function getProjects() {
-  return projectData.projects;
+  return projectData.projects || [];
 }
 
 function getProjectById(projectId) {
-  return projectData.projects.find(p => p.id === projectId) || null;
+  return projectData.projects.find(p => Number(p.id) === Number(projectId)) || null;
 }
 
 function deleteProject(projectId) {
-  projectData.projects = projectData.projects.filter(p => p.id !== projectId);
-  return "Project deleted";
+  projectData.projects = projectData.projects.filter(p => Number(p.id) !== Number(projectId));
+  renderProjects();
 }
 
-// TASK FUNCTIONS
-
+// -------------------- TASK FUNCTIONS --------------------
 function addTask(projectId, title, assignedTo = null) {
   const project = getProjectById(projectId);
-  if (!project) return "Project not found";
+  if (!project) return;
 
   const newTask = {
     id: generateId(),
     title,
     status: "todo",
-    assignedTo
+    assignedTo,
+    notes: []
   };
   project.tasks.push(newTask);
-  return newTask;
+  renderTasks(projectId);
 }
 
 function getTasks(projectId) {
   const project = getProjectById(projectId);
-  return project ? project.tasks : "Project not found";
+  return project ? project.tasks || [] : [];
 }
 
 function updateTask(projectId, taskId, updates) {
   const project = getProjectById(projectId);
-  if (!project) return "Project not found";
+  if (!project) return;
 
-  const task = project.tasks.find(t => t.id === taskId);
-  if (!task) return "Task not found";
+  const task = project.tasks.find(t => Number(t.id) === Number(taskId));
+  if (!task) return;
 
   Object.assign(task, updates);
-  return task;
+  renderTasks(projectId);
 }
 
 function deleteTask(projectId, taskId) {
   const project = getProjectById(projectId);
-  if (!project) return "Project not found";
+  if (!project) return;
 
-  project.tasks = project.tasks.filter(t => t.id !== taskId);
-  return "Task deleted";
+  project.tasks = project.tasks.filter(t => Number(t.id) !== Number(taskId));
+  renderTasks(projectId);
 }
 
-// USER FUNCTIONS
-
+// -------------------- USER FUNCTIONS --------------------
 function addUser(name) {
   const newUser = {
     id: generateId(),
@@ -120,84 +98,45 @@ function addUser(name) {
 }
 
 function getUsers() {
-  return projectData.users;
+  return projectData.users || [];
 }
 
 function getUserById(userId) {
-  return projectData.users.find(u => u.id === userId) || null;
+  return projectData.users.find(u => Number(u.id) === Number(userId)) || null;
 }
 
 function deleteUser(userId) {
-  projectData.users = projectData.users.filter(u => u.id !== userId);
-
-  // Remove assignments from tasks
+  projectData.users = projectData.users.filter(u => Number(u.id) !== Number(userId));
   projectData.projects.forEach(project => {
     project.tasks.forEach(task => {
-      if (task.assignedTo === userId) task.assignedTo = null;
+      if (task.assignedTo === Number(userId)) task.assignedTo = null;
     });
   });
-
-  return "User deleted";
+  renderProjects();
 }
 
-/*
-function demo() {
-  console.log("Initial JSON:");
-  console.log(JSON.stringify(projectData, null, 2));
-
-  // Add a new project
-  const newProj = createProject("Marketing Campaign", "Launch ad campaign");
-  console.log("After adding project:");
-  console.log(JSON.stringify(projectData, null, 2));
-
-  // Add a task to existing project
-  addTask(1, "Test homepage layout", 2);
-
-  // Update a task
-  updateTask(1, 101, { status: "done" });
-
-  // Delete a task
-  deleteTask(1, 102);
-
-  // Add a new user
-  addUser("New User");
-
-  console.log("Final JSON after changes:");
-  console.log(JSON.stringify(projectData, null, 2));
-}
-*/
-
-//project notes
+// -------------------- NOTES --------------------
 function addProjectNote(projectId, note) {
   const project = getProjectById(projectId);
-  if (!project) return "Project not found";
-
+  if (!project) return;
   if (!project.notes) project.notes = [];
   project.notes.push(note);
-  return note;
+  renderProjects();
 }
 
-function getProjectNotes(projectId) {
-  const project = getProjectById(projectId);
-  return project ? project.notes || [] : "Project not found";
-}
-//task notes
 function addTaskNote(projectId, taskId, note) {
   const project = getProjectById(projectId);
-  if (!project) return "Project not found";
+  if (!project) return;
 
-  const task = project.tasks.find(t => t.id === taskId);
-  if (!task) return "Task not found";
+  const task = project.tasks.find(t => Number(t.id) === Number(taskId));
+  if (!task) return;
 
   if (!task.notes) task.notes = [];
   task.notes.push(note);
-  return note;
+  renderTasks(projectId);
 }
 
-function getTaskNotes(projectId, taskId) {
-  const project = getProjectById(projectId);
-  if (!project) return "Project not found";
-
-  const task = project.tasks.find(t => t.id === taskId);
-  return task ? task.notes || [] : "Task not found";
-}
+// -------------------- INITIALIZE --------------------
+window.addEventListener("DOMContentLoaded", () => {
+  loadProjectData();
+});

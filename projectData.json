@@ -1,96 +1,52 @@
-let projectData = {
-  projects: [
+{
+  "projects": [
     {
-      id: 1,
-      name: "Website Redesign",
-      description: "Create and launch new company website.",
-      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
-      tasks: [
+      "id": 1,
+      "name": "Website Redesign",
+      "description": "Create and launch new company website.",
+      "notes": ["Kickoff meeting scheduled", "Client wants minimalistic design"],
+      "tasks": [
         {
-          id: 101,
-          title: "Design homepage layout",
-          status: "in-progress",
-          assignedTo: 1,
-          notes: ["Use company colors", "Check responsive breakpoints"] // new
+          "id": 101,
+          "title": "Design homepage layout",
+          "status": "in-progress",
+          "assignedTo": 1,
+          "notes": ["Use company colors", "Check responsive breakpoints"]
         },
         {
-          id: 102,
-          title: "Build navigation menu",
-          status: "todo",
-          assignedTo: 2,
-          notes: []
+          "id": 102,
+          "title": "Build navigation menu",
+          "status": "todo",
+          "assignedTo": 2,
+          "notes": []
         }
       ]
     },
     {
-      id: 2,
-      name: "Website for New Client",
-      description: "Create and launch new company website.",
-      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
-      tasks: [
+      "id": 2,
+      "name": "Website for New Client",
+      "description": "Create and launch new company website.",
+      "notes": ["Kickoff meeting scheduled", "Client wants minimalistic design"],
+      "tasks": [
         {
-          id: 201,
-          title: "Design homepage layout",
-          status: "in-progress",
-          assignedTo: 1,
-          notes: ["Use company colors", "Check responsive breakpoints"] // new
+          "id": 201,
+          "title": "Design homepage layout",
+          "status": "in-progress",
+          "assignedTo": 1,
+          "notes": ["Use company colors", "Check responsive breakpoints"]
         },
         {
-          id: 202,
-          title: "Build navigation menu",
-          status: "todo",
-          assignedTo: 2,
-          notes: []
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: "Website for Walmart",
-      description: "Create and launch new company website.",
-      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
-      tasks: [
-        {
-          id: 301,
-          title: "Design homepage layout",
-          status: "in-progress",
-          assignedTo: 1,
-          notes: ["Use company colors", "Check responsive breakpoints"] // new
-        },
-        {
-          id: 302,
-          title: "Build navigation menu",
-          status: "todo",
-          assignedTo: 2,
-          notes: []
-        }
-      ]
-    },
-    {
-      id: 4,
-      name: "Website for Nike",
-      description: "Create and launch new company website.",
-      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
-      tasks: [
-        {
-          id: 401,
-          title: "Design homepage layout",
-          status: "in-progress",
-          assignedTo: 1,
-          notes: ["Use company colors", "Check responsive breakpoints"] // new
-        },
-        {
-          id: 402,
-          title: "Build navigation menu",
-          status: "todo",
-          assignedTo: 2,
-          notes: []
+          "id": 202,
+          "title": "Build navigation menu",
+          "status": "todo",
+          "assignedTo": 2,
+          "notes": []
         }
       ]
     }
   ],
-  users: [
-    { id: 1, name: "Sarah Walker" },
-    { id: 2, name: "Daryle Suggs" }
+  "users": [
+    { "id": 1, "name": "Sarah Walker" },
+    { "id": 2, "name": "Daryle Suggs" }
   ]
-};
+}
