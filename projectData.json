@@ -21,7 +21,7 @@ let projectData = {
           notes: []
         }
       ]
-    }
+    },
     {
       id: 2,
       name: "Website for New Client",
@@ -43,7 +43,7 @@ let projectData = {
           notes: []
         }
       ]
-    }
+    },
     {
       id: 3,
       name: "Website for Walmart",
@@ -65,7 +65,7 @@ let projectData = {
           notes: []
         }
       ]
-    }
+    },
     {
       id: 4,
       name: "Website for Nike",
