@@ -73,9 +73,10 @@ main {
 }
 /*project cards*/
 #projects-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .project-card {
@@ -85,7 +86,8 @@ main {
   display: flex;
   flex-direction: column;
   box-shadow: 10px 10px 5px rgba(0,0,0,0.05);
-  width: 32%;
+  width: auto;
+  min-width: 30%;
 }
 
 .project-card h2 {
