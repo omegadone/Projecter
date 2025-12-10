@@ -76,6 +76,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  width: 100%;
 }
 
 .project-card {
@@ -87,7 +88,6 @@ main {
   flex-direction: column;
   gap: 1rem;
   box-shadow: 10px 10px 5px rgba(0,0,0,0.05);
-  flex: 0 0 calc(33.333% - 0.666rem);
   max-width: calc(33.333% - 0.666rem);
 }
 
