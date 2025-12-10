@@ -22,6 +22,72 @@ let projectData = {
         }
       ]
     }
+        {
+      id: 2,
+      name: "Website for New Client",
+      description: "Create and launch new company website.",
+      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
+      tasks: [
+        {
+          id: 201,
+          title: "Design homepage layout",
+          status: "in-progress",
+          assignedTo: 1,
+          notes: ["Use company colors", "Check responsive breakpoints"] // new
+        },
+        {
+          id: 202,
+          title: "Build navigation menu",
+          status: "todo",
+          assignedTo: 2,
+          notes: []
+        }
+      ]
+    }
+            {
+      id: 3,
+      name: "Website for Walmart",
+      description: "Create and launch new company website.",
+      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
+      tasks: [
+        {
+          id: 301,
+          title: "Design homepage layout",
+          status: "in-progress",
+          assignedTo: 1,
+          notes: ["Use company colors", "Check responsive breakpoints"] // new
+        },
+        {
+          id: 302,
+          title: "Build navigation menu",
+          status: "todo",
+          assignedTo: 2,
+          notes: []
+        }
+      ]
+    }
+            {
+      id: 4,
+      name: "Website for Nike",
+      description: "Create and launch new company website.",
+      notes: ["Kickoff meeting scheduled", "Client wants minimalistic design"], // new
+      tasks: [
+        {
+          id: 401,
+          title: "Design homepage layout",
+          status: "in-progress",
+          assignedTo: 1,
+          notes: ["Use company colors", "Check responsive breakpoints"] // new
+        },
+        {
+          id: 402,
+          title: "Build navigation menu",
+          status: "todo",
+          assignedTo: 2,
+          notes: []
+        }
+      ]
+    }
   ],
   users: [
     { id: 1, name: "Sarah Walker" },
