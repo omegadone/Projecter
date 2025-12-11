@@ -3,6 +3,9 @@ const projectsContainer = document.getElementById("projects-container");
 const addProjectBtn = document.getElementById("add-project-btn");
 const newProjectName = document.getElementById("new-project-name");
 const newProjectDesc = document.getElementById("new-project-desc");
+const usersContainer = document.getElementById("users-container");
+const addUserBtn = document.getElementById("add-user-btn");
+const newUserNameInput = document.getElementById("new-user-name");
 
 //Render Users
 function renderUsers() {
