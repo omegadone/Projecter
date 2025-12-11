@@ -47,7 +47,7 @@ function deleteProject(projectId) {
   renderProjects();
 }
 
-// -------------------- TASK FUNCTIONS --------------------
+//Task Functions
 function addTask(projectId, title, assignedTo = null) {
   const project = getProjectById(projectId);
   if (!project) return;
@@ -87,35 +87,39 @@ function deleteTask(projectId, taskId) {
   renderTasks(projectId);
 }
 
-// -------------------- USER FUNCTIONS --------------------
+//User Functions
+
 function addUser(name) {
-  const newUser = {
-    id: generateId(),
-    name
-  };
-  projectData.users.push(newUser);
-  return newUser;
+    const newUser = {
+        id: generateId(),
+        name
+    };
+    projectData.users.push(newUser);
+    renderProjects(); // This will refresh projects and the user list
+    return newUser;
 }
 
 function getUsers() {
-  return projectData.users || [];
+    return projectData.users || [];
 }
 
 function getUserById(userId) {
-  return projectData.users.find(u => Number(u.id) === Number(userId)) || null;
+    return projectData.users.find(u => Number(u.id) === Number(userId)) || null;
 }
 
 function deleteUser(userId) {
-  projectData.users = projectData.users.filter(u => Number(u.id) !== Number(userId));
-  projectData.projects.forEach(project => {
-    project.tasks.forEach(task => {
-      if (task.assignedTo === Number(userId)) task.assignedTo = null;
+    projectData.users = projectData.users.filter(u => Number(u.id) !== Number(userId));
+    
+    projectData.projects.forEach(project => {
+        project.tasks.forEach(task => {
+            if (task.assignedTo === Number(userId)) task.assignedTo = null;
+        });
     });
-  });
-  renderProjects();
+
+    renderProjects();
 }
 
-// -------------------- NOTES --------------------
+//Notes
 function addProjectNote(projectId, note) {
   const project = getProjectById(projectId);
   if (!project) return;
@@ -136,7 +140,7 @@ function addTaskNote(projectId, taskId, note) {
   renderTasks(projectId);
 }
 
-// -------------------- INITIALIZE --------------------
+// -------------------- Initialize --------------------
 window.addEventListener("DOMContentLoaded", () => {
   loadProjectData();
 });

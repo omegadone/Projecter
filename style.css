@@ -342,3 +342,96 @@ main {
   border: 1px solid #4ECDC4;
   border-radius: 5px;
 }
+
+/*User Management*/
+.user-management-section {
+    border: 2px solid #4ECDC4;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.user-management-section h3 {
+    color: #292F36;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #4ECDC4;
+    padding-bottom: 0.5rem;
+}
+
+.add-user-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.add-user-controls input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 2px solid #4ECDC4;
+    border-radius: 5px;
+}
+
+.add-user-controls button {
+    background-color: #4ECDC4;
+    color: #F7FFF7;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-user-controls button:hover {
+    background-color: #38B5AA;
+}
+
+.users-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.user-item {
+    background-color: #F7FFF7;
+    border: 1px solid #4ECDC4;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-item span {
+    font-weight: bold;
+}
+
+.user-item button {
+    background-color: #E74C3C; /* A distinct color for deletion */
+    color: #F7FFF7;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.user-item button:hover {
+    background-color: #C0392B;
+}
+
+/* Ensure project cards don't use 100% width on large screens and wrap */
+#projects-container {
+    gap: 20px; /* Add a gap between cards */
+}
+
+.project-card {
+    min-width: 300px; /* Give a reasonable min width */
+    max-width: 45%; /* Prevent cards from being too wide */
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}

@@ -1,12 +1,28 @@
-// -------------------- interface.js --------------------
-
 // Get DOM elements
 const projectsContainer = document.getElementById("projects-container");
 const addProjectBtn = document.getElementById("add-project-btn");
 const newProjectName = document.getElementById("new-project-name");
 const newProjectDesc = document.getElementById("new-project-desc");
 
-// -------------------- RENDER PROJECTS --------------------
+//Render Users
+function renderUsers() {
+    usersContainer.innerHTML = "";
+    const users = getUsers();
+
+    users.forEach(user => {
+        const userItem = document.createElement("div");
+        userItem.classList.add("user-item");
+
+        userItem.innerHTML = `
+            <span>${user.name} (ID: ${user.id})</span>
+            <button onclick="handleDeleteUser(${user.id})">Remove</button>
+        `;
+
+        usersContainer.appendChild(userItem);
+    });
+}
+
+//Render Projects
 function renderProjects() {
   projectsContainer.innerHTML = "";
   const projects = getProjects();
@@ -43,7 +59,7 @@ function renderProjects() {
   });
 }
 
-// -------------------- RENDER TASKS --------------------
+//Render Tasks
 function renderTasks(projectId) {
   const tasksDiv = document.getElementById(`tasks-${projectId}`);
   if (!tasksDiv) return;
@@ -94,7 +110,21 @@ function renderTasks(projectId) {
   });
 }
 
-// -------------------- EVENT HANDLERS --------------------
+//Event Handlers
+
+addUserBtn.addEventListener("click", () => {
+    const name = newUserNameInput.value.trim();
+    if (!name) return alert("User name required!");
+    addUser(name);
+    newUserNameInput.value = "";
+    
+});
+
+function handleDeleteUser(userId) {
+    if (!confirm("Are you sure you want to delete this user? All their assigned tasks will become unassigned.")) return;
+    deleteUser(userId);
+}
+
 addProjectBtn.addEventListener("click", () => {
   const name = newProjectName.value.trim();
   const desc = newProjectDesc.value.trim();
