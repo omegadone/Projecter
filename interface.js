@@ -22,7 +22,7 @@ function renderUsers() {
         userItem.classList.add("user-item");
 
         userItem.innerHTML = `
-            <span>${user.name} (ID: ${user.id})</span>
+            <span>${user.name} </span>
             <button onclick="handleDeleteUser(${user.id})">Remove</button>
         `;
 
