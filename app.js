@@ -1,90 +1,92 @@
-// -------------------- app.js --------------------
-
-// Store loaded data
+//Store loaded data
 let projectData = { projects: [], users: [] };
 
-// -------------------- Load JSON --------------------
+//Load JSON
 async function loadProjectData() {
-  try {
-    const response = await fetch("projectData.json");
-    if (!response.ok) throw new Error("Failed to load projectData.json");
-    projectData = await response.json();
-    renderProjects(); // render after loading
-  } catch (err) {
-    console.error("Error loading project data:", err);
-  }
+    try {
+        const response = await fetch("projectData.json");
+        if (!response.ok) throw new Error("Failed to load projectData.json");
+        projectData = await response.json();
+        
+        
+        renderProjects(); 
+        renderUsers();
+        
+    } catch (err) {
+        console.error("Error loading project data:", err);
+    }
 }
 
-// -------------------- Utilities --------------------
+//Utilities
 function generateId() {
-  return Math.floor(Math.random() * 100000);
+    return Math.floor(Math.random() * 100000);
 }
 
-// -------------------- PROJECT FUNCTIONS --------------------
+//Projects Functions
 function createProject(name, description) {
-  const newProject = {
-    id: generateId(),
-    name,
-    description,
-    tasks: [],
-    notes: []
-  };
-  projectData.projects.push(newProject);
-  renderProjects();
-  return newProject;
+    const newProject = {
+        id: generateId(),
+        name,
+        description,
+        tasks: [],
+        notes: []
+    };
+    projectData.projects.push(newProject);
+    renderProjects();
+    return newProject;
 }
 
 function getProjects() {
-  return projectData.projects || [];
+    return projectData.projects || [];
 }
 
 function getProjectById(projectId) {
-  return projectData.projects.find(p => Number(p.id) === Number(projectId)) || null;
+    return projectData.projects.find(p => Number(p.id) === Number(projectId)) || null;
 }
 
 function deleteProject(projectId) {
-  projectData.projects = projectData.projects.filter(p => Number(p.id) !== Number(projectId));
-  renderProjects();
+    projectData.projects = projectData.projects.filter(p => Number(p.id) !== Number(projectId));
+    renderProjects();
 }
 
 //Task Functions
 function addTask(projectId, title, assignedTo = null) {
-  const project = getProjectById(projectId);
-  if (!project) return;
+    const project = getProjectById(projectId);
+    if (!project) return;
 
-  const newTask = {
-    id: generateId(),
-    title,
-    status: "todo",
-    assignedTo,
-    notes: []
-  };
-  project.tasks.push(newTask);
-  renderTasks(projectId);
+    const newTask = {
+        id: generateId(),
+        title,
+        status: "todo",
+        assignedTo,
+        notes: []
+    };
+    project.tasks.push(newTask);
+    renderTasks(projectId);
 }
 
 function getTasks(projectId) {
-  const project = getProjectById(projectId);
-  return project ? project.tasks || [] : [];
+    const project = getProjectById(projectId);
+    return project ? project.tasks || [] : [];
 }
 
 function updateTask(projectId, taskId, updates) {
-  const project = getProjectById(projectId);
-  if (!project) return;
+    const project = getProjectById(projectId);
+    if (!project) return;
 
-  const task = project.tasks.find(t => Number(t.id) === Number(taskId));
-  if (!task) return;
+    const task = project.tasks.find(t => Number(t.id) === Number(taskId));
+    if (!task) return;
 
-  Object.assign(task, updates);
-  renderTasks(projectId);
+    Object.assign(task, updates);
+    renderTasks(projectId);
 }
 
 function deleteTask(projectId, taskId) {
-  const project = getProjectById(projectId);
-  if (!project) return;
+    const project = getProjectById(projectId);
+    if (!project) return;
 
-  project.tasks = project.tasks.filter(t => Number(t.id) !== Number(taskId));
-  renderTasks(projectId);
+    project.tasks = project.tasks.filter(t => Number(t.id) !== Number(taskId));
+    renderTasks(projectId);
 }
 
 //User Functions
@@ -95,7 +97,8 @@ function addUser(name) {
         name
     };
     projectData.users.push(newUser);
-    renderProjects(); // This will refresh projects and the user list
+    renderUsers(); 
+    renderProjects(); 
     return newUser;
 }
 
@@ -110,37 +113,39 @@ function getUserById(userId) {
 function deleteUser(userId) {
     projectData.users = projectData.users.filter(u => Number(u.id) !== Number(userId));
     
+
     projectData.projects.forEach(project => {
         project.tasks.forEach(task => {
             if (task.assignedTo === Number(userId)) task.assignedTo = null;
         });
     });
 
-    renderProjects();
+    renderUsers(); 
+    renderProjects(); 
 }
 
 //Notes
 function addProjectNote(projectId, note) {
-  const project = getProjectById(projectId);
-  if (!project) return;
-  if (!project.notes) project.notes = [];
-  project.notes.push(note);
-  renderProjects();
+    const project = getProjectById(projectId);
+    if (!project) return;
+    if (!project.notes) project.notes = [];
+    project.notes.push(note);
+    renderProjects();
 }
 
 function addTaskNote(projectId, taskId, note) {
-  const project = getProjectById(projectId);
-  if (!project) return;
+    const project = getProjectById(projectId);
+    if (!project) return;
 
-  const task = project.tasks.find(t => Number(t.id) === Number(taskId));
-  if (!task) return;
+    const task = project.tasks.find(t => Number(t.id) === Number(taskId));
+    if (!task) return;
 
-  if (!task.notes) task.notes = [];
-  task.notes.push(note);
-  renderTasks(projectId);
+    if (!task.notes) task.notes = [];
+    task.notes.push(note);
+    renderTasks(projectId);
 }
 
-// -------------------- Initialize --------------------
+//Initialize
 window.addEventListener("DOMContentLoaded", () => {
-  loadProjectData();
+    loadProjectData();
 });
