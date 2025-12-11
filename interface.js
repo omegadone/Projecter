@@ -6,8 +6,14 @@ const newProjectDesc = document.getElementById("new-project-desc");
 
 //Render Users
 function renderUsers() {
+    // 1. Check if the container exists
+    if (!usersContainer) { 
+        console.error("Users container element not found!");
+        return; 
+    }
+    
     usersContainer.innerHTML = "";
-    const users = getUsers();
+    const users = getUsers(); // Utility function from app.js
 
     users.forEach(user => {
         const userItem = document.createElement("div");
@@ -16,7 +22,7 @@ function renderUsers() {
         userItem.innerHTML = `
             <span>${user.name} (ID: ${user.id})</span>
             <button onclick="handleDeleteUser(${user.id})">Remove</button>
-        `;
+        `; // <-- This button triggers the delete
 
         usersContainer.appendChild(userItem);
     });
@@ -26,6 +32,8 @@ function renderUsers() {
 function renderProjects() {
   projectsContainer.innerHTML = "";
   const projects = getProjects();
+
+  renderUsers();
 
   projects.forEach(project => {
     const projectCard = document.createElement("div");
